@@ -425,9 +425,9 @@ template {
   background-repeat: no-repeat;
 }
 
-.card__arrow.open {
-  -webkit-transform: rotate(-180deg);
-          transform: rotate(-180deg);
+.card__arrow.close {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
 }
 
 .card__search-cansel {

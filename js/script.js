@@ -10,18 +10,24 @@ window.onload = function () {
     const searchCansel = document.getElementById("search-cansel");
     const logo = document.getElementById("logo");
 
-    setTimeout(() => cardBody.style.height = cardContent.offsetHeight + "px", 1000);
+    //setTimeout(() => cardBody.style.height = cardContent.offsetHeight + "px", 1000);
+
+    if (detailShow === true) {
+        showDetail();
+    } else {
+        closeDetail();
+    }
 
     function closeDetail() {
         detailShow = false;
         cardBody.style.height = "0";
-        cardArrow.classList.remove("open");
+        cardArrow.classList.add("close");
     }
 
     function showDetail() {
         detailShow = true;
         cardBody.style.height = cardContent.offsetHeight + "px";
-        cardArrow.classList.add("open");
+        cardArrow.classList.remove("close");
     }
 
     function showSearch() {
