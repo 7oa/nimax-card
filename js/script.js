@@ -10,8 +10,6 @@ window.onload = function () {
     const searchCansel = document.getElementById("search-cansel");
     const logo = document.getElementById("logo");
 
-    //setTimeout(() => cardBody.style.height = cardContent.offsetHeight + "px", 1000);
-
     if (detailShow === true) {
         showDetail();
     } else {
