@@ -430,7 +430,7 @@ template {
           transform: rotate(180deg);
 }
 
-.card__search-cansel {
+.card__search-cancel {
   width: 20px;
   height: 20px;
   -webkit-transition: 0.3s;

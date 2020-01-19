@@ -1,66 +1,65 @@
 "use strict";
 
-window.onload = function () {
-    let detailShow = true;
-    const cardArrow = document.getElementById("card-arrow");
-    const cardBody = document.getElementById("card-body");
-    const cardContent = document.getElementById("card-content");
-    const searchInput = document.getElementById("search-input");
-    const searchButton = document.getElementById("search-button");
-    const searchCansel = document.getElementById("search-cansel");
-    const logo = document.getElementById("logo");
+(function() {
+  let isDetailShown = true;
+  const card = document.querySelector(".js-card");
+  const cardArrow = card.querySelector(".js-card-arrow");
+  const cardBody = card.querySelector(".js-card-body");
+  const cardContent = card.querySelector(".js-card-content");
+  const searchInput = card.querySelector(".js-search-input");
+  const searchButton = card.querySelector(".js-search-button");
+  const searchCancel = card.querySelector(".js-search-cancel");
+  const logo = card.querySelector(".js-card-logo");
 
-    if (detailShow === true) {
-        showDetail();
-    } else {
-        closeDetail();
-    }
+  const closeDetail = function() {
+    isDetailShown = false;
+    cardBody.style.height = "0";
+    cardArrow.classList.add("close");
+  };
 
-    function closeDetail() {
-        detailShow = false;
-        cardBody.style.height = "0";
-        cardArrow.classList.add("close");
-    }
+  const showDetail = function() {
+    isDetailShown = true;
+    cardBody.style.height = cardContent.offsetHeight + "px";
+    cardArrow.classList.remove("close");
+  };
 
-    function showDetail() {
-        detailShow = true;
-        cardBody.style.height = cardContent.offsetHeight + "px";
-        cardArrow.classList.remove("close");
-    }
+  const showSearch = function() {
+    searchInput.classList.add("open");
+    searchCancel.style.display = "block";
+    cardArrow.style.display = "none";
+    logo.classList.add("small");
+    searchInput.focus();
+  };
 
-    function showSearch() {
-        searchInput.classList.add("open");
-        searchCansel.style.display = 'block';
-        cardArrow.style.display = 'none';
-        logo.classList.add("small");
-        searchInput.focus();
-    }
+  const hideSearch = function() {
+    searchInput.classList.remove("open");
+    searchCancel.style.display = "none";
+    cardArrow.style.display = "block";
+    logo.classList.remove("small");
+    searchInput.value = "";
+  };
 
-    function hideSearch() {
-        searchInput.classList.remove("open");
-        searchCansel.style.display = 'none';
-        cardArrow.style.display = 'block';
-        logo.classList.remove("small");
-        searchInput.value = "";
-    }
+  const countries = [
+    "Minsk, <span>Belarus</span>",
+    "Mineralnye vody, <span>Russia<span>",
+    "Moscow, <span>Russia</span>"
+  ];
+  autocomplete(searchInput, countries);
 
-    cardArrow.onclick = function () {
-        if (detailShow === true) {
-            closeDetail();
-        } else {
-            showDetail();
-        }
-    };
+  cardArrow.addEventListener("click", function() {
+    isDetailShown ? closeDetail() : showDetail();
+  });
 
-    searchButton.onclick = function () {
-        showSearch();
-        if (detailShow === true) closeDetail();
-    };
+  searchButton.addEventListener("click", function() {
+    showSearch();
+    isDetailShown && closeDetail();
+  });
 
-    searchCansel.onclick = function () {
-        hideSearch();
-    };
+  searchCancel.addEventListener("click", function() {
+    hideSearch();
+  });
 
-    var countries = ["Minsk, <span>Belarus</span>", "Mineralnye vody, <span>Russia<span>", "Moscow, <span>Russia</span>"];
-    autocomplete(searchInput, countries);
-};
+  window.addEventListener("load", function() {
+    isDetailShown ? showDetail() : closeDetail();
+  });
+})();
